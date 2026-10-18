@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>William KH Wang | 軟體工程師・AI 系統架構・個人作品集</title>
+  <meta name="description" content="William KH Wang (王國憲) 的個人技術作品集 — 專注於全端工程、AI Agent 智慧工作流架構、高效能 Web 平台與互動物理模擬。">
+  <meta name="keywords" content="William KH Wang, 軟體工程師, 作品集, Full-Stack Developer, AI Agent, TypeScript, Python, GitHub Pages">
+  <meta name="author" content="William KH Wang">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="William KH Wang | 軟體工程師・技術作品集">
+  <meta property="og:description" content="全端工程、AI 智慧代理人與互動技術作品集。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://williamkhwang.github.io/WilliamKH/">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Dynamic Interactive Particle Canvas Background -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo-brand" aria-label="William KH Wang 首頁">
+        <span class="logo-badge">W</span>
+        <span class="logo-text">William <span>KH</span></span>
+      </a>
+
+      <nav aria-label="主要導覽">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#hero" class="nav-link active">關於我</a></li>
+          <li><a href="#bento-overview" class="nav-link">概覽與終端機</a></li>
+          <li><a href="#projects" class="nav-link">精選專案</a></li>
+          <li><a href="#simulation-lab" class="nav-link">波的模擬實驗室</a></li>
+          <li><a href="#timeline" class="nav-link">歷程</a></li>
+          <li><a href="#contact" class="nav-link">聯絡合作</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle (Dark / Light) -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="切換深色/淺色主題" title="切換深色/淺色模式">
+          <!-- Sun icon for dark mode (click to switch to light) -->
+          <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon icon for light mode (click to switch to dark) -->
+          <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn-primary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem;">
+          <span>聯繫合作</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-toggle" class="mobile-toggle" aria-label="展開導覽選單">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section & Bento Grid Hub -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="bento-grid" id="bento-overview">
+
+          <!-- Card 1: Main Profile Hero Card (Span 8) -->
+          <article class="bento-card card-profile">
+            <div>
+              <div class="profile-header">
+                <div class="avatar-wrapper">
+                  <img src="assets/images/avatar.jpg" alt="William KH Wang 肖像" class="avatar-img" width="104" height="104">
+                  <div class="status-badge" title="目前狀態：開放技術諮詢與專案合作">
+                    <div class="status-dot"></div>
+                  </div>
+                </div>
+
+                <div class="profile-intro">
+                  <span class="status-tag">
+                    <span style="font-size: 0.8rem;">●</span> 開放專案合作與技術交流
+                  </span>
+                  <h1 class="profile-name">William KH Wang</h1>
+                  <div class="profile-title">
+                    <span id="typing-text">Full-Stack Engineer</span>
+                    <span class="typing-cursor"></span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="profile-bio" style="margin-top: 1.5rem;">
+                熱衷於構建堅韌且具美感的高效能數位系統。專注於現代全端開發、自主 AI 智慧工作流 (Multi-Agent Architectures)、分散式後端服務以及直覺易懂的互動科學模擬視覺化。
+              </p>
+            </div>
+
+            <div>
+              <!-- Key Metrics -->
+              <div class="profile-metrics">
+                <div class="metric-item">
+                  <span class="metric-number">5+</span>
+                  <span class="metric-label">年程式開發與系統構建經驗</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-number">20+</span>
+                  <span class="metric-label">GitHub 開源與核心專案</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-number">99.9%</span>
+                  <span class="metric-label">可靠性與高架構品質導向</span>
+                </div>
+              </div>
+
+              <div class="profile-cta-group">
+                <a href="#projects" class="btn-primary">
+                  <span>瀏覽代表專案</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </a>
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>GitHub 主頁</span>
+                </a>
+                <button id="copy-email-hero" class="btn-secondary" onclick="document.getElementById('copy-email-btn').click();">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>複製 Email</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Interactive Terminal Bento (Span 4) -->
+          <article class="bento-card card-terminal" aria-label="互動式命令列終端機">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
+              </div>
+              <span class="terminal-title">zsh — william@portfolio</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">UTF-8</span>
+            </div>
+
+            <div class="terminal-body">
+              <div class="terminal-logs" id="terminal-logs">
+                <div class="terminal-line success">Welcome to William's Interactive Terminal v2.4</div>
+                <div class="terminal-line output">Type <span style="color: #00f0ff; font-weight: bold;">"help"</span> to view commands or try <span style="color: #a855f7; font-weight: bold;">"projects"</span>.</div>
+              </div>
+              <div class="terminal-input-row">
+                <span class="terminal-prompt">william@portfolio:~$</span>
+                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="輸入指令並按 Enter..." aria-label="終端機指令輸入">
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: GitHub Activity & Contribution Widget (Span 4) -->
+          <article class="bento-card card-github">
+            <div>
+              <div class="card-title-row">
+                <h2 class="card-heading">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>語言佔比與程式動態</span>
+                </h2>
+                <span class="github-chip">@WilliamKHWang</span>
+              </div>
+
+              <div class="github-grid-stats">
+                <div class="lang-bar-wrapper">
+                  <div class="lang-label">
+                    <span>TypeScript / JavaScript</span>
+                    <span>45%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-ts"></div></div>
+                </div>
+
+                <div class="lang-bar-wrapper">
+                  <div class="lang-label">
+                    <span>Python & AI Frameworks</span>
+                    <span>30%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-py"></div></div>
+                </div>
+
+                <div class="lang-bar-wrapper">
+                  <div class="lang-label">
+                    <span>Rust / Systems</span>
+                    <span>15%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-rs"></div></div>
+                </div>
+
+                <div class="lang-bar-wrapper">
+                  <div class="lang-label">
+                    <span>Go & Cloud Tooling</span>
+                    <span>10%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-go"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.775rem; color: var(--text-dim); margin-top: 1rem;">
+                <span>持續貢獻熱度指標</span>
+                <span>Active Streak 🔥</span>
+              </div>
+              <div class="github-activity-strip" title="GitHub 貢獻紀錄示意圖">
+                <div class="commit-cell commit-lvl-1"></div>
+                <div class="commit-cell commit-lvl-2"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-3"></div>
+                <div class="commit-cell commit-lvl-2"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-1"></div>
+                <div class="commit-cell commit-lvl-3"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-2"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-3"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-2"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+                <div class="commit-cell commit-lvl-4"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Tech Stack Matrix Radar (Span 8) -->
+          <article class="bento-card card-tech-radar">
+            <div class="card-title-row">
+              <h2 class="card-heading">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>專業技術棧與核心能力矩陣</span>
+              </h2>
+              <span class="github-chip">Architecture & Skills</span>
+            </div>
+
+            <div class="tech-categories">
+              <!-- Frontend -->
+              <div>
+                <h3 class="tech-group-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                  前端與互動設計
+                </h3>
+                <div class="tech-badges">
+                  <span class="tech-badge">TypeScript</span>
+                  <span class="tech-badge">React / Next.js</span>
+                  <span class="tech-badge">Vanilla CSS & Grid</span>
+                  <span class="tech-badge">Canvas API / WebGL</span>
+                  <span class="tech-badge">Performance / CWV</span>
+                </div>
+              </div>
+
+              <!-- Backend & Cloud -->
+              <div>
+                <h3 class="tech-group-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                  後端與分散式架構
+                </h3>
+                <div class="tech-badges">
+                  <span class="tech-badge">Node.js / Express</span>
+                  <span class="tech-badge">Python / FastAPI</span>
+                  <span class="tech-badge">PostgreSQL & Redis</span>
+                  <span class="tech-badge">Docker & K8s</span>
+                  <span class="tech-badge">REST & WebSocket</span>
+                </div>
+              </div>
+
+              <!-- AI & System -->
+              <div>
+                <h3 class="tech-group-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                  自主 AI 與現代工具
+                </h3>
+                <div class="tech-badges">
+                  <span class="tech-badge">Gemini / OpenAI API</span>
+                  <span class="tech-badge">Multi-Agent Workflow</span>
+                  <span class="tech-badge">RAG & Vector DB</span>
+                  <span class="tech-badge">Git & CI/CD Pipelines</span>
+                  <span class="tech-badge">Linux Shell Poweruser</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Featured Works</span>
+          <h2 class="section-title">精選專案展示與創新實驗</h2>
+          <p class="section-subtitle">從具體的技術架構、AI 協同到流暢的物理互動模擬，實踐高品質代碼與卓越使用者體驗。</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" role="tablist" aria-label="專案類別篩選">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">全部專案 (All)</button>
+          <button class="filter-btn" data-filter="ai" role="tab">AI & 智慧代理</button>
+          <button class="filter-btn" data-filter="web" role="tab">全端架構 (Full-Stack)</button>
+          <button class="filter-btn" data-filter="creative" role="tab">互動科學與物理模擬</button>
+          <button class="filter-btn" data-filter="tools" role="tab">開源工具 (Open Source)</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+          <!-- Project 1: WaveSim Physics Lab -->
+          <article class="project-card" data-category="creative web" id="proj-wavesim">
+            <div class="project-preview" style="background: radial-gradient(circle at 50% 50%, #0d1e38 0%, #060913 100%);">
+              <div class="project-preview-graphic">
+                <!-- SVG Wave Graphic -->
+                <svg width="240" height="140" viewBox="0 0 240 140" fill="none">
+                  <path d="M 10,70 Q 40,20 70,70 T 130,70 T 190,70 T 250,70" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9" filter="drop-shadow(0 0 8px #00f0ff)"/>
+                  <path d="M 10,70 Q 40,110 70,70 T 130,70 T 190,70 T 250,70" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+                  <circle cx="70" cy="70" r="4.5" fill="#ffffff" />
+                  <circle cx="130" cy="70" r="4.5" fill="#00f0ff" />
+                  <circle cx="190" cy="70" r="4.5" fill="#a855f7" />
+                </svg>
+              </div>
+              <span class="project-badge-corner">Physics & Canvas</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-info">
+                <h3 class="project-title">
+                  <span>WaveSim Lab (波的物理傳播模擬器)</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </h3>
+                <p class="project-desc">
+                  高互動性物理教學與波形研究模擬器。支援橫波、縱波（疏密波）、干涉現象與反射邊界即時運算，透過 Canvas 60fps 流暢渲染質點運動軌跡。
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">HTML5 Canvas</span>
+                  <span class="project-tag">Math & Physics</span>
+                  <span class="project-tag">Interactive UI</span>
+                  <span class="project-tag">Vanilla JS</span>
+                </div>
+              </div>
+
+              <div class="project-footer-actions">
+                <a href="#simulation-lab" class="project-action-link primary">
+                  <span>即時體驗模擬</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="https://github.com/WilliamKHWang/WilliamKH" target="_blank" rel="noopener noreferrer" class="project-action-link">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>程式碼庫</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: AgentFlow Hub -->
+          <article class="project-card" data-category="ai web" id="proj-agentflow">
+            <div class="project-preview" style="background: radial-gradient(circle at 50% 50%, #1e1338 0%, #0b0718 100%);">
+              <div class="project-preview-graphic">
+                <!-- SVG AI Graph -->
+                <svg width="220" height="130" viewBox="0 0 220 130" fill="none">
+                  <rect x="20" y="45" width="45" height="40" rx="8" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="1.5" />
+                  <rect x="90" y="20" width="45" height="40" rx="8" fill="rgba(0, 240, 255, 0.2)" stroke="#00f0ff" stroke-width="1.5" />
+                  <rect x="90" y="75" width="45" height="40" rx="8" fill="rgba(99, 102, 241, 0.2)" stroke="#6366f1" stroke-width="1.5" />
+                  <rect x="160" y="45" width="45" height="40" rx="8" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1.5" />
+                  <!-- Links -->
+                  <path d="M 65 65 L 90 40" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <path d="M 65 65 L 90 95" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <path d="M 135 40 L 160 65" stroke="#00f0ff" stroke-width="1.5"/>
+                  <path d="M 135 95 L 160 65" stroke="#6366f1" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <span class="project-badge-corner">Autonomous AI</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-info">
+                <h3 class="project-title">
+                  <span>AgentFlow (多智慧體自動化協作中樞)</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </h3>
+                <p class="project-desc">
+                  結合 Gemini 與 LLM Function Calling 的任務編排框架。具備動態工具調度、長期記憶檢索、串流輸出與反省重試機制，實現複雜工程任務的自主閉環。
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">TypeScript</span>
+                  <span class="project-tag">LLM Orchestration</span>
+                  <span class="project-tag">Function Calling</span>
+                  <span class="project-tag">WebSockets</span>
+                </div>
+              </div>
+
+              <div class="project-footer-actions">
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link primary">
+                  <span>查看架構設計</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: OmniPulse Cloud -->
+          <article class="project-card" data-category="web tools" id="proj-omnipulse">
+            <div class="project-preview" style="background: radial-gradient(circle at 50% 50%, #0d2729 0%, #061113 100%);">
+              <div class="project-preview-graphic">
+                <!-- SVG Pulse & Metrics Graphic -->
+                <svg width="220" height="130" viewBox="0 0 220 130" fill="none">
+                  <polyline points="20,80 50,80 70,30 90,110 110,60 130,85 150,75 170,80 200,80" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px #10b981)"/>
+                  <line x1="20" y1="105" x2="200" y2="105" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+                  <line x1="20" y1="45" x2="200" y2="45" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+                </svg>
+              </div>
+              <span class="project-badge-corner">Cloud Telemetry</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-info">
+                <h3 class="project-title">
+                  <span>OmniPulse (分散式可觀測性儀表板)</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </h3>
+                <p class="project-desc">
+                  微服務健康指標實時監控中樞。具備毫秒級日誌收集、延遲預警、異常分佈拓撲視覺化與高抗壓 WebSocket 資料通道。
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Go / Python</span>
+                  <span class="project-tag">Next.js</span>
+                  <span class="project-tag">Observability</span>
+                  <span class="project-tag">Docker</span>
+                </div>
+              </div>
+
+              <div class="project-footer-actions">
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link primary">
+                  <span>技術規格說明</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: DevForge CLI Toolkit -->
+          <article class="project-card" data-category="tools" id="proj-devforge">
+            <div class="project-preview" style="background: radial-gradient(circle at 50% 50%, #2a1b12 0%, #120b06 100%);">
+              <div class="project-preview-graphic">
+                <svg width="220" height="130" viewBox="0 0 220 130" fill="none">
+                  <rect x="25" y="25" width="170" height="80" rx="8" fill="#181310" stroke="#f59e0b" stroke-width="1.5"/>
+                  <circle cx="45" cy="40" r="3" fill="#ef4444"/>
+                  <circle cx="55" cy="40" r="3" fill="#f59e0b"/>
+                  <circle cx="65" cy="40" r="3" fill="#10b981"/>
+                  <text x="45" y="70" fill="#f59e0b" font-family="monospace" font-size="12">$ devforge scaffold --fast</text>
+                  <text x="45" y="88" fill="#10b981" font-family="monospace" font-size="11">✔ Environment initialized in 82ms</text>
+                </svg>
+              </div>
+              <span class="project-badge-corner">CLI & Developer Tool</span>
+            </div>
+
+            <div class="project-content">
+              <div class="project-info">
+                <h3 class="project-title">
+                  <span>DevForge CLI (跨平台開發者生產力工具)</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </h3>
+                <p class="project-desc">
+                  為現代工程師設計的自動化終端輔助工具。整合 Git 快速工作流、專案鷹架生成、環境診斷與安全配置檢查。
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Node.js / Rust</span>
+                  <span class="project-tag">CLI Architecture</span>
+                  <span class="project-tag">Git Automation</span>
+                  <span class="project-tag">Cross-Platform</span>
+                </div>
+              </div>
+
+              <div class="project-footer-actions">
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link primary">
+                  <span>安裝指南</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="project-action-link">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Wave Simulation Laboratory Section -->
+    <section class="section" id="simulation-lab" style="background: rgba(0, 0, 0, 0.15);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Physics Lab</span>
+          <h2 class="section-title">波的傳播物理動態模擬實驗室</h2>
+          <p class="section-subtitle">即時調整頻率與振幅，直觀觀察橫波與縱波（疏密波）質點在介質中的週期性傳播特性。</p>
+        </div>
+
+        <div class="wavesim-card">
+          <div class="wavesim-controls">
+            <div class="control-item">
+              <label for="wave-type"><strong>波形種類：</strong></label>
+              <select id="wave-type" class="form-input" style="padding: 0.35rem 0.75rem; width: auto; font-size: 0.85rem;">
+                <option value="transverse">橫波 (Transverse Wave)</option>
+                <option value="longitudinal">縱波 / 疏密波 (Longitudinal Wave)</option>
+              </select>
+            </div>
+
+            <div class="control-item">
+              <label for="wave-freq"><strong>頻率 (Frequency)：</strong></label>
+              <input type="range" id="wave-freq" min="1" max="5" step="0.2" value="2.5">
+            </div>
+
+            <div class="control-item">
+              <label for="wave-amp"><strong>振幅 (Amplitude)：</strong></label>
+              <input type="range" id="wave-amp" min="10" max="60" step="5" value="35">
+            </div>
+
+            <button id="wave-pause" class="btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem; margin-left: auto;">
+              暫停模擬
+            </button>
+          </div>
+
+          <canvas id="wave-canvas" height="180"></canvas>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); padding-inline: 0.5rem;">
+            <span>● 藍色曲線：連續波動外形</span>
+            <span>● 節點白點：質點垂直或水平之微觀振動行為（介質不隨波遷移）</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section class="section" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Journey & Milestones</span>
+          <h2 class="section-title">專業成長與技術經歷</h2>
+          <p class="section-subtitle">不斷專注於解決架構瓶頸、打造優雅工具與累積軟體工程深度的里程碑。</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-role">資深全端工程師 / 系統架構規劃</span>
+                <span class="timeline-period">2024 — Present</span>
+              </div>
+              <div class="timeline-org">獨立開發者與開源專案技術主導</div>
+              <p class="timeline-desc">
+                專注於高吞吐量雲端服務架構、多代理人 AI 流程自動化、TypeScript 現代前後端全鏈路設計，並發表多款開源工程工具。
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-role">全端軟體工程師 (Full-Stack Engineer)</span>
+                <span class="timeline-period">2021 — 2024</span>
+              </div>
+              <div class="timeline-org">軟體開發與網頁應用工程團隊</div>
+              <p class="timeline-desc">
+                負責現代化 SPA/SSR 平台重構、RESTful/GraphQL API 開發、Docker 容器化部署與 CI/CD 自動化建置流水線，將頁面載入速度提升 40% 以上。
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-role">互動科學視覺化與演算法研究</span>
+                <span class="timeline-period">2019 — 2021</span>
+              </div>
+              <div class="timeline-org">科學教育與互動模擬開發</div>
+              <p class="timeline-desc">
+                運用 HTML5 Canvas、數學數值運算與粒子系統開發物理運動、光學與波傳播之直觀動態教學演示軟體，協助學習者降低抽象概念理解門檻。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">開啟對話，探索合作可能</h2>
+          <p class="section-subtitle">無論是技術諮詢、專案合作、開源討論或單純交流想法，隨時歡迎聯絡！</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Channels -->
+          <div class="contact-info-card">
+            <div>
+              <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">直接與我聯繫</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                我通常會在 24 小時內回覆訊息。點擊右側按鈕可直接複製電子郵件地址，或直接發送快速留言。
+              </p>
+            </div>
+
+            <div class="contact-channels">
+              <div class="contact-channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="channel-text">
+                  <span class="channel-label">電子郵件 (Direct Email)</span>
+                  <span class="channel-value">kuohsien2005@gmail.com</span>
+                </div>
+                <button id="copy-email-btn" class="copy-email-btn" title="複製郵件地址">複製</button>
+              </div>
+
+              <a href="https://github.com/WilliamKHWang" target="_blank" rel="noopener noreferrer" class="contact-channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </div>
+                <div class="channel-text">
+                  <span class="channel-label">GitHub 個人主頁</span>
+                  <span class="channel-value">github.com/WilliamKHWang</span>
+                </div>
+                <svg style="margin-left: auto; color: var(--text-dim);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+
+              <div class="contact-channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div class="channel-text">
+                  <span class="channel-label">所在時區與地點</span>
+                  <span class="channel-value">Taiwan (UTC+8)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form Card -->
+          <div class="bento-card contact-form-card">
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;">發送快速留言</h3>
+            <form id="contact-form" class="contact-form">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">您的稱呼 / 大名</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="例如：Alex Chen" required>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">您的電子信箱</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="alex@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">留言內容與合作主旨</label>
+                <textarea id="contact-message" class="form-textarea" placeholder="簡述您的專案需求、合作想法或想交流的主題..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" style="justify-content: center; padding: 0.85rem;">
+                <span>送出訊息</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p>© 2026 <strong>William KH Wang (王國憲)</strong>. All rights reserved.</p>
+        <p style="font-size: 0.775rem; color: var(--text-dim); margin-top: 0.25rem;">
+          Designed & Built with modern web standards for GitHub Pages.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#hero">關於我</a>
+        <a href="#projects">專案作品</a>
+        <a href="#simulation-lab">物理模擬</a>
+        <a href="https://github.com/WilliamKHWang/WilliamKH" target="_blank" rel="noopener noreferrer">本站原始碼</a>
+      </div>
+
+      <a href="#hero" class="back-to-top" aria-label="回到頁首" title="回到頁首">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Toast Element -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
